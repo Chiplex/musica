@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'musica';
+  mensaje = 'Envio  desde función';
+  
+  getMensaje() {
+    return this.mensaje;
+  }
 }

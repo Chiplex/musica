@@ -1,0 +1,19 @@
+<!-- Propierty Binding -->
+<img src="{{ imageURL }}" />
+<img [src]="imageURL" />
+
+<button disabled>Enviar</button>
+<button [disabled]="botonStatus">Añadir</button>
+
+<!-- Class Binding -->
+<button [class.active]="isActive">Agregar</button>
+
+<!-- Style Binding -->
+<button [style.backgroundColor]="isActive ? 'green' : 'white'">
+  Boton
+</button>
+
+<!-- Event Binding -->
+<button (click)="guardar($event)">
+  Guardar
+</button>
