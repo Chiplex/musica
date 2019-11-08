@@ -18,4 +18,24 @@ export class NotaComponent {
   guardar(event){
     console.log(event);
   }
+
+  contador = 1;
+
+  // *ngFor
+  numeros = [1,2,3,4,5,6];
+
+  colocar(){
+    this.numeros.push(Math.random());
+  }
+
+  // Event Filtering
+  onKeyUp(event){
+    if (event.keyCode === 13) {
+      console.log("con argumentos");
+    }
+  }
+  
+  onKeyUpSinEvent(){
+    console.log("sin argumentos");    
+  }
 }

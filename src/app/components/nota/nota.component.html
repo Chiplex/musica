@@ -1,19 +1,48 @@
-<!-- Propierty Binding -->
-<img src="{{ imageURL }}" />
-<img [src]="imageURL" />
+<div>
+  <!-- Propierty Binding -->
+  <img src="{{ imageURL }}" /><br>
+  <img [src]="imageURL" /> <br>
+ 
+  <button disabled>Enviar</button><br>
+  <button [disabled]="botonStatus">Añadir</button>
+</div>
+<hr>
+<div>
+  <!-- Class Binding -->
+  <button [class.active]="isActive">Agregar</button>
+</div>
+<hr>
+<div>
+  <!-- Style Binding -->
+  <button [style.backgroundColor]="isActive ? 'green' : 'white'">
+    Boton
+  </button>
+</div>
+<hr>
+<div>
+  <!-- Event Binding -->
+  <button (click)="guardar($event)">
+    Guardar
+  </button>
 
-<button disabled>Enviar</button>
-<button [disabled]="botonStatus">Añadir</button>
+  <button (click)="contador=contador+1">
+    Sumar
+  </button>
 
-<!-- Class Binding -->
-<button [class.active]="isActive">Agregar</button>
+  <p>{{ contador }}</p>
+</div>
+<hr>
+<div>
+  <!-- *ngFor -->
+  <ul>
+    <li *ngFor="let numero of numeros">{{ numero }}</li>
+  </ul>
+  <button (click)="colocar()">Colocar</button>
+</div>
+<hr>
+<!-- Event Filtering -->
+Con argumentos 
+<input type="text" (keyup)="onKeyUp($event)">
 
-<!-- Style Binding -->
-<button [style.backgroundColor]="isActive ? 'green' : 'white'">
-  Boton
-</button>
-
-<!-- Event Binding -->
-<button (click)="guardar($event)">
-  Guardar
-</button>
+Sin argumentos 
+<input type="text" (keyup.f)="onKeyUpSinEvent()">

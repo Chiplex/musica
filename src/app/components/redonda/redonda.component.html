@@ -1,0 +1,35 @@
+<!-- Interpolacion de cadena -->
+<h1>{{ mensaje }}</h1>
+<h2>{{'Notificación: ' + getMensaje()}}</h2>
+<hr>
+<!-- Property Binding -->
+<img src="{{ imgUrl }}" alt="">
+<img [src]="imgUrl" alt="">
+<br>
+<button disabled>Enviar</button>
+<button [disabled]="status">Guardar</button>
+<hr>
+<!-- Class Binding -->
+<button [class.grande]="tamanio">Añadir</button>
+<hr>
+<!--Style Binding  -->
+<button [style.border]="border? '13px solid #ffd23e': '10px solid #0000ff'">
+  Agregar
+</button>
+<hr>
+<!-- Event Binding -->
+<button (click)="editar(imgUrl)">Editar</button>
+
+<button (click)="contador=contador+1">Sumar</button>
+<p>{{ contador }}</p>
+
+<button (click)="status=!status">Sumar</button>
+
+<button (keypress)="border=!border">Sumar</button>
+<hr>
+<!-- Event Binding 2 -->
+Con Argumentos <br>
+<input type="text" name="" id="" (keyup)='keyConArgumentos($event)'>
+<br>
+Sin Argumentos <br>
+<input type="text" name="" id="" (keyup.v)='keySinArgumentos()'>
