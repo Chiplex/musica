@@ -1,5 +1,5 @@
 <div>
-  <!-- Propierty Binding -->
+  <h2>Propierty Binding</h2>
   <img src="{{ imageURL }}" /><br>
   <img [src]="imageURL" /> <br>
  
@@ -8,19 +8,19 @@
 </div>
 <hr>
 <div>
-  <!-- Class Binding -->
+  <h2>Class Binding</h2>
   <button [class.active]="isActive">Agregar</button>
 </div>
 <hr>
 <div>
-  <!-- Style Binding -->
+  <h2>Style Binding</h2>
   <button [style.backgroundColor]="isActive ? 'green' : 'white'">
     Boton
   </button>
 </div>
 <hr>
 <div>
-  <!-- Event Binding -->
+  <h2>Event Binding</h2>
   <button (click)="guardar($event)">
     Guardar
   </button>
@@ -33,16 +33,85 @@
 </div>
 <hr>
 <div>
-  <!-- *ngFor -->
+  <h2>*ngFor</h2>
   <ul>
     <li *ngFor="let numero of numeros">{{ numero }}</li>
   </ul>
   <button (click)="colocar()">Colocar</button>
 </div>
 <hr>
-<!-- Event Filtering -->
-Con argumentos 
-<input type="text" (keyup)="onKeyUp($event)">
+<div>
+  <h2>Event Filtering</h2>
+  Con argumentos 
+  <input type="text" (keyup)="onKeyUp($event)">
+  <br>
+  Sin argumentos 
+  <input type="text" (keyup.f)="onKeyUpSinEvent()">
+</div>
+<hr>
+<div>
+  <h2>Template Variable</h2>
+  Enviando el evento
+  <input type="text" 
+    (keyup.enter)="requestInput($event)">
+  <br>
+  Enviando solo el valor
+  <input type="text" 
+    (keyup.enter)="requestValue(nombre.value)" 
+    #nombre>
+</div>
+<hr>
+<div>
+  <h2>Two Way binding</h2>
+  Mostrando como contenido de etqueta
+  <p>{{ persona.nombre }}</p>
+  Mostrando como valor de atributo <br>
+  <input type="text" value="{{ persona.nombre }}">
+  <br>
+  Mostrando como propiedad value de angular <br>
+  <input type="text" [value]="persona.nombre">
+  <br>
+  Actualización de variables
+  <input type="text" 
+    [(ngModel)]="persona.nombre">
+</div>
+<hr>
+<div>
+  <h2>*ngIf</h2>
+  <button (click)="nivel = nivel + 1">
+    Subir de nivel
+  </button>
+  <p>{{ nivel }}</p>
+  <strong *ngIf="nivel >= 10">
+    Nivel desbloqueado
+  </strong>
 
-Sin argumentos 
-<input type="text" (keyup.f)="onKeyUpSinEvent()">
+  <h3>Container</h3>
+  <ng-container *ngIf="isLogged">
+      <button (click)="isLogged = !isLogged">
+        Iniciar sesion
+      </button>
+      <button>Registrarse</button>
+  </ng-container>
+  <ng-container *ngIf="!isLogged">
+      <button (click)="isLogged = !isLogged">
+        Cerrar sesion
+      </button>
+  </ng-container>
+
+  <h3>Templates</h3>
+  <ng-container *ngIf="isClosed; else menu">
+    <button (click)="isClosed = false">
+      Abrir menú
+    </button>
+  </ng-container>
+  <ng-template #menu>
+    <button>Ir al panel</button>
+    <button>Ir al perfil</button>
+    <button>Ir al lista</button>
+    <button (click)="isClosed = true">
+      Cerrar menú
+    </button>
+  </ng-template>
+
+</div>

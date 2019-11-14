@@ -33,3 +33,63 @@ Con Argumentos <br>
 <br>
 Sin Argumentos <br>
 <input type="text" name="" id="" (keyup.v)='keySinArgumentos()'>
+<hr>
+<!-- Template Variable -->
+<h2>Template Variable</h2>
+<h3>ejemplo con event</h3>
+<input type="text" (keyup.enter)="requestInput($event)">
+<h3>Ejemplo con template variable</h3>
+<input type="text" (keyup.enter)="requestValue(nombre.value)" #nombre>
+<hr>
+<h3>Two Way Binding</h3>
+<p>{{ persona.nombre }}</p>
+<strong>Interpolacion de cadena</strong>
+<input type="text" value="{{ persona.edad }}"><br>
+<strong>Property Binding</strong>
+<input type="text" [value]="persona.nombre">
+<h3>Actualizacion de datos</h3>
+<strong>Nombres</strong>
+<input type="text" [(ngModel)] = "persona.nombre">
+<hr>
+
+<h1>*ngIf</h1>
+<button (click)="nivel = nivel + 1">Subir nivel</button>
+<p>{{ nivel }} <strong *ngIf="nivel >= 10">Nivel desbloqueado</strong></p>
+
+<h1>If con container</h1>
+<ng-container *ngIf="isNotLogged">
+  <button (click)="isNotLogged = !isNotLogged">Iniciar sesion</button>
+  <button>Registrarse</button>
+</ng-container>
+
+<ng-container *ngIf="!isNotLogged">
+  <button (click)="isNotLogged = !isNotLogged">Cerrar sesión</button>
+</ng-container>
+
+<h1>if con template</h1>
+<ng-container *ngIf="isClosed; else menu">
+  <button (click)="isClosed = false">Abrir Menu</button>
+</ng-container>
+<ng-template #menu>
+  <button>Ir a Panel</button>
+  <button>Ir a Perfil</button>
+  <button (click)="isClosed = true">Cerrar menu</button>
+</ng-template>
+
+<h1>*ngFor</h1>
+<button (click)="colocar()">Colocar</button>
+<ul>
+  <li *ngFor="let numero of numeros">{{ numero }}</li>
+</ul>
+<hr>
+<h1>Ejemplos</h1>
+<ul>
+  <li *ngFor="let user of users">{{ user }}</li>
+</ul>
+<h2>agregar</h2>
+<input type="text" [(ngModel)]="username" (keyup.enter)="agregar()">
+<h2>agregar2</h2>
+<input type="text" (keyup.enter)="agregar2(persona.value)" #persona>
+<button (click)="agregar()">Agregar</button>
+
+<app-blanca></app-blanca>

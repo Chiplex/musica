@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-blanca',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlancaComponent implements OnInit {
 
-  constructor() { }
+  usuarios:any = [];
+
+  constructor() { 
+    let user = new UserService();
+    this.usuarios = user.getUsers();
+  }
 
   ngOnInit() {
   }

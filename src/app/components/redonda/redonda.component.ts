@@ -47,4 +47,47 @@ export class RedondaComponent implements OnInit {
   ngOnInit() {
   }
 
+  requestInput(event){
+    console.log(event.target.value); 
+  }
+
+  requestValue(valor){
+    console.log(valor);
+    
+  }
+
+  persona:any = {
+    nombre: 'erick',
+    edad: '25'
+  };
+
+  nivel = 0;
+
+  isNotLogged = true;
+
+  isClosed = true;
+
+  numeros = [1,2,3,4,5,6];
+
+  colocar(){
+    this.numeros.push(Math.random());
+  }
+
+  users:any = [];
+
+  agregar(){
+    if (this.username != null) {
+      this.users.push(this.username);
+      this.username = null;
+    }
+  }
+
+  agregar2(persona){
+    if (persona != null) {
+      this.users.push(persona);
+      persona = null;
+    }
+  }
+
+  username = null;
 }

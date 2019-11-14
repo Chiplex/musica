@@ -38,4 +38,27 @@ export class NotaComponent {
   onKeyUpSinEvent(){
     console.log("sin argumentos");    
   }
+
+  //Template Variable
+  requestInput(event){
+    console.log(event.target.value);
+  }
+
+  requestValue(nombre){
+    console.log(nombre);
+  }
+
+  // Two way binding
+  persona = {
+    nombre: 'alex',
+    edad:35
+  }; 
+
+  //If en  Contenedores y Templates
+  nivel = 0;
+
+  isLogged = true;
+
+  // Templates
+  isClosed = true;
 }
