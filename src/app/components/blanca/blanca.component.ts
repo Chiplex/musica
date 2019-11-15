@@ -7,12 +7,7 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./blanca.component.css']
 })
 export class BlancaComponent implements OnInit {
-
-  usuarios:any = [];
-
   constructor() { 
-    let user = new UserService();
-    this.usuarios = user.getUsers();
   }
 
   ngOnInit() {

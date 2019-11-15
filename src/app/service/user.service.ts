@@ -1,21 +1,14 @@
-export class UserService{
-    getUsers(){
-        return [
-            {
-                'nombre': 'Alex',
-                'edad': 25,
-                'estado': 'soltero'
-            },
-            {
-                'nombre': 'Alberto',
-                'edad': 25,
-                'estado': 'divorciado'
-            },
-            {
-                'nombre': 'Antonio',
-                'edad': 23,
-                'estado': 'casado'
-            }
-        ]
-    }
+import { Injectable } from '@angular/core';
+import { User } from '../interface/user';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+  public user: User;
+  constructor() { }
+
+  getUsers(): any {
+    throw new Error("Method not implemented.");
+  }
 }

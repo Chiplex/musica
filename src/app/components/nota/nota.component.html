@@ -113,5 +113,25 @@
       Cerrar menú
     </button>
   </ng-template>
-
+</div>
+<hr>
+<div> 
+  <h3>Selección</h3>
+  <h2>Seleccionaste: {{ seleccionFruta }} con NgModel</h2>
+  <select [(ngModel)]="seleccionFruta" name="fruta">
+    <option *ngFor="let fruta of frutas" [value]="fruta.nombre">{{fruta.nombre}}</option>
+  </select>
+  <h2>Seleccionaste: {{ seleccionVerdura }} sin NgModel pero capturaste el nombre con la propiedad</h2>
+  <select  name="verdura" (change)="seleccionVerdura = escogerVerdura.options[$event.target.options.selectedIndex].text" #escogerVerdura>
+    <option *ngFor="let verdura of verduras" [value]="verdura.id">{{verdura.nombre}}</option>
+  </select>
+  <h2>Seleccionaste: {{ seleccionColor }} sin NgModel llamando a una funcion</h2>
+  <select  name="verdura2" (change)="change(escogerColor)" #escogerColor>
+    <option *ngFor="let color of colores" [value]="color.id">{{color.nombre}}</option>
+  </select>
+</div>
+<hr>
+<div>
+  <h1>@input</h1>
+  <app-blanca *ngFor="let usuario of usuarios"></app-blanca>
 </div>

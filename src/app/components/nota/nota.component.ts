@@ -1,11 +1,12 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: "app-nota",
   templateUrl: "./nota.component.html",
   styleUrls: ["./nota.component.css"]
 })
-export class NotaComponent {
+export class NotaComponent implements OnInit {
   
   // Property Binding
   imageURL = "http://lorempixel.com/400/200";
@@ -61,4 +62,73 @@ export class NotaComponent {
 
   // Templates
   isClosed = true;
+
+  // Select
+  frutas:any = [
+    {
+      id: 1,
+      nombre: 'manzana'
+    },
+    {
+      id: 2,
+      nombre: 'naranja'
+    },
+    {
+      id: 3,
+      nombre: 'platano'
+    }
+  ];
+  seleccionFruta = null;
+
+  verduras:any = [
+    {
+      id: 1,
+      nombre: 'tomate'
+    },
+    {
+      id: 2,
+      nombre: 'zanahoria'
+    },
+    {
+      id: 3,
+      nombre: 'locoto'
+    }
+  ];
+  seleccionVerdura = null;
+
+  colores:any = [
+    {
+      id: 1,
+      nombre: 'rojo'
+    },
+    {
+      id: 2,
+      nombre: 'naranja'
+    },
+    {
+      id: 3,
+      nombre: 'amarillo'
+    }
+  ];
+  seleccionColor = null;
+
+  change(target){
+    console.log(target);
+    this.seleccionColor = target.options[target.options.selectedIndex].text;
+  }
+
+  usuarios = [];
+
+  constructor(
+    private _http: HttpClient
+
+  ){
+
+  }
+
+  ngOnInit(){
+    this._http.get('http://127.0.0.1:8000').subscribe((datos:any[]) => {
+      this.usuarios = datos
+    })
+  }
 }
