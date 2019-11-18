@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter, Host } from '@angular/core';
+import { RedondaComponent } from '../redonda/redonda.component';
 
 @Component({
   selector: 'app-silencio',
@@ -8,9 +9,23 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class SilencioComponent implements OnInit {
 
-  constructor() { }
+  @Input('VieneDeRedonda') usuario:any;
+
+  @Output() eventoEliminar = new EventEmitter<number>();
+
+  constructor(
+    @Host() private _appRedonda: RedondaComponent
+  ) { }
 
   ngOnInit() {
+  }
+
+  eliminar(id:any){
+    this.eventoEliminar.emit(id);
+  }
+
+  eliminar2(id:any){
+    this._appRedonda.usuarios = this._appRedonda.usuarios.filter(usuario => usuario.id != id) ;
   }
 
 }

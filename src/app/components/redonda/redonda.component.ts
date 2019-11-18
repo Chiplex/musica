@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-redonda',
@@ -42,10 +43,9 @@ export class RedondaComponent implements OnInit {
     alert('Presionado')
   }
 
-  constructor() { }
+  
 
-  ngOnInit() {
-  }
+  
 
   requestInput(event){
     console.log(event.target.value); 
@@ -90,4 +90,45 @@ export class RedondaComponent implements OnInit {
   }
 
   username = null;
+
+  // Input Output
+
+  usuarios:any = [];
+  constructor(
+    private _http:HttpClient
+  ) { }
+
+  ngOnInit() {
+    this._http.get('https://jsonplaceholder.typicode.com/users')
+      .subscribe((data)=> {
+        this.usuarios = data;
+      });
+  }
+
+  borrar(id:any){
+    this.usuarios = this.usuarios.filter(usuario => usuario.id != id);
+  }
+
+  fruta = null;
+
+  frutas = [
+    {
+      id:1,
+      nombre: 'Manzana'
+    },
+    {
+      id:2,
+      nombre: 'Platano'
+    },
+    {
+      id:3,
+      nombre: 'Naranja'
+    }
+  ];
+
+  cambiarTitulo(target){
+    console.log(target);
+    
+    this.fruta = target.options[target.options.selectedIndex].text;
+  }
 }

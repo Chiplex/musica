@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { SilencioComponent } from './components/silencio/silencio.component';
 import { RedondaComponent } from './components/redonda/redonda.component';
 import { BlancaComponent } from './components/blanca/blanca.component';
 import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,14 @@ import { LoginComponent } from './components/login/login.component';
     RedondaComponent,
     BlancaComponent,
     LoginComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,2 +1,23 @@
-<div>
-</div>
+<dl class="row">
+  <dt class="col-8">
+    {{ user.name }}
+  </dt>
+  <dd class="col-4">
+    <div class="btn-group" role="group" aria-label="Button group">
+      <button
+        class="btn btn-danger btn-sm"
+        type="button"
+        (click)="borrarUser(user.id)"
+      >
+        1
+      </button>
+      <button
+        class="btn btn-danger btn-sm"
+        type="button"
+        (click)="borrarUser2(user.id)"
+      >
+        2
+      </button>
+    </div>
+  </dd>
+</dl>

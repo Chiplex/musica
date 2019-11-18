@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-nota",
@@ -117,18 +118,46 @@ export class NotaComponent implements OnInit {
     this.seleccionColor = target.options[target.options.selectedIndex].text;
   }
 
+  // Input y Output
   usuarios = [];
 
-  constructor(
-    private _http: HttpClient
-
-  ){
-
-  }
+  /* Aqui estuvo un constructor que instanciaba 
+    _http de tipo HttpClient pero debe estar en 
+    otro sitio añadiendo otras variables */
 
   ngOnInit(){
-    this._http.get('http://127.0.0.1:8000').subscribe((datos:any[]) => {
-      this.usuarios = datos
-    })
+    this._http
+      .get('https://jsonplaceholder.typicode.com/users')
+      .subscribe((datos:any[]) => {
+        this.usuarios = datos
+      })
+  }
+
+  borrarUsuario(id:number){
+    this.usuarios = this.usuarios.filter(
+      usuario => usuario.id != id
+      );
+  }
+
+  // Reactivee Formes
+  signupForm: FormGroup;
+
+  constructor(    
+    private _http: HttpClient,
+    private _builder: FormBuilder
+  ) {
+    this.signupForm = this._builder.group({
+      nombre: [''],
+      usuario: ['', Validators.required],
+      email: ['', Validators.compose(
+          [Validators.email, Validators.required]
+        )],
+      clave: ['', Validators.required]
+    });
+  }
+
+  registrar(values){
+    console.log(values);
+    
   }
 }

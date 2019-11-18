@@ -1,56 +1,103 @@
 <!-- Interpolacion de cadena -->
+<div class="card-columns">
+  <div class="card">
+    <div class="card-header">
+      Header
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Title</h5>
+      <p class="card-text">Content</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Header
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Title</h5>
+      <p class="card-text">Content</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Header
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Title</h5>
+      <p class="card-text">Content</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Header
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Title</h5>
+      <p class="card-text">Content</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Header
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Title</h5>
+      <p class="card-text">Content</p>
+    </div>
+  </div>
+</div>
 <h1>{{ mensaje }}</h1>
-<h2>{{'Notificación: ' + getMensaje()}}</h2>
-<hr>
+<h2>{{ "Notificación: " + getMensaje() }}</h2>
+<hr />
 <!-- Property Binding -->
-<img src="{{ imgUrl }}" alt="">
-<img [src]="imgUrl" alt="">
-<br>
+<img src="{{ imgUrl }}" alt="" />
+<img [src]="imgUrl" alt="" />
+<br />
 <button disabled>Enviar</button>
 <button [disabled]="status">Guardar</button>
-<hr>
+<hr />
 <!-- Class Binding -->
 <button [class.grande]="tamanio">Añadir</button>
-<hr>
+<hr />
 <!--Style Binding  -->
-<button [style.border]="border? '13px solid #ffd23e': '10px solid #0000ff'">
+<button [style.border]="border ? '13px solid #ffd23e' : '10px solid #0000ff'">
   Agregar
 </button>
-<hr>
+<hr />
 <!-- Event Binding -->
 <button (click)="editar(imgUrl)">Editar</button>
 
-<button (click)="contador=contador+1">Sumar</button>
+<button (click)="contador = contador + 1">Sumar</button>
 <p>{{ contador }}</p>
 
-<button (click)="status=!status">Sumar</button>
+<button (click)="status = !status">Sumar</button>
 
-<button (keypress)="border=!border">Sumar</button>
-<hr>
+<button (keypress)="border = !border">Sumar</button>
+<hr />
 <!-- Event Binding 2 -->
-Con Argumentos <br>
-<input type="text" name="" id="" (keyup)='keyConArgumentos($event)'>
-<br>
-Sin Argumentos <br>
-<input type="text" name="" id="" (keyup.v)='keySinArgumentos()'>
-<hr>
+Con Argumentos <br />
+<input type="text" name="" id="" (keyup)="keyConArgumentos($event)" />
+<br />
+Sin Argumentos <br />
+<input type="text" name="" id="" (keyup.v)="keySinArgumentos()" />
+<hr />
 <!-- Template Variable -->
 <h2>Template Variable</h2>
 <h3>ejemplo con event</h3>
-<input type="text" (keyup.enter)="requestInput($event)">
+<input type="text" (keyup.enter)="requestInput($event)" />
 <h3>Ejemplo con template variable</h3>
-<input type="text" (keyup.enter)="requestValue(nombre.value)" #nombre>
-<hr>
+<input type="text" (keyup.enter)="requestValue(nombre.value)" #nombre />
+<hr />
 <h3>Two Way Binding</h3>
 <p>{{ persona.nombre }}</p>
 <strong>Interpolacion de cadena</strong>
-<input type="text" value="{{ persona.edad }}"><br>
+<input type="text" value="{{ persona.edad }}" /><br />
 <strong>Property Binding</strong>
-<input type="text" [value]="persona.nombre">
+<input type="text" [value]="persona.nombre" />
 <h3>Actualizacion de datos</h3>
 <strong>Nombres</strong>
-<input type="text" [(ngModel)] = "persona.nombre">
-<hr>
+<input type="text" [(ngModel)]="persona.nombre" />
+<hr />
 
 <h1>*ngIf</h1>
 <button (click)="nivel = nivel + 1">Subir nivel</button>
@@ -81,15 +128,49 @@ Sin Argumentos <br>
 <ul>
   <li *ngFor="let numero of numeros">{{ numero }}</li>
 </ul>
-<hr>
+<hr />
 <h1>Ejemplos</h1>
 <ul>
   <li *ngFor="let user of users">{{ user }}</li>
 </ul>
 <h2>agregar</h2>
-<input type="text" [(ngModel)]="username" (keyup.enter)="agregar()">
+<input type="text" [(ngModel)]="username" (keyup.enter)="agregar()" />
 <h2>agregar2</h2>
-<input type="text" (keyup.enter)="agregar2(persona.value)" #persona>
+<input type="text" (keyup.enter)="agregar2(persona.value)" #persona />
 <button (click)="agregar()">Agregar</button>
 
-<app-blanca></app-blanca>
+<div class="card-columns">
+  <div class="card">
+    <div class="card-header">
+      Header
+    </div>
+    <div class="card-body">
+      <app-silencio
+        [VieneDeRedonda]="usuario"
+        *ngFor="let usuario of usuarios"
+        (eventoEliminar)="borrar($event)"
+      ></app-silencio>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Select
+    </div>
+    <div class="card-body">
+      <!-- <div class="form-group">
+        <label for="fruta">Seleccionaste: {{ fruta }}</label>
+        <select id="fruta" class="custom-select" name="" [(ngModel)]="fruta">
+          <option [value]="fruta.nombre" *ngFor="let fruta of frutas">{{ fruta.nombre }}</option>
+        </select>
+      </div> -->
+      <div class="form-group">
+        <label for="fruta">Seleccionaste: {{ fruta }}</label>
+        <select id="fruta" class="custom-select" name="" (change)="cambiarTitulo(seleccion)" #seleccion>
+          <option [value]="fruta.id" *ngFor="let fruta of frutas">{{
+            fruta.nombre
+          }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

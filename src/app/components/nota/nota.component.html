@@ -1,137 +1,275 @@
-<div>
-  <h2>Propierty Binding</h2>
-  <img src="{{ imageURL }}" /><br>
-  <img [src]="imageURL" /> <br>
- 
-  <button disabled>Enviar</button><br>
-  <button [disabled]="botonStatus">Añadir</button>
-</div>
-<hr>
-<div>
-  <h2>Class Binding</h2>
-  <button [class.active]="isActive">Agregar</button>
-</div>
-<hr>
-<div>
-  <h2>Style Binding</h2>
-  <button [style.backgroundColor]="isActive ? 'green' : 'white'">
-    Boton
-  </button>
-</div>
-<hr>
-<div>
-  <h2>Event Binding</h2>
-  <button (click)="guardar($event)">
-    Guardar
-  </button>
-
-  <button (click)="contador=contador+1">
-    Sumar
-  </button>
-
-  <p>{{ contador }}</p>
-</div>
-<hr>
-<div>
-  <h2>*ngFor</h2>
-  <ul>
-    <li *ngFor="let numero of numeros">{{ numero }}</li>
-  </ul>
-  <button (click)="colocar()">Colocar</button>
-</div>
-<hr>
-<div>
-  <h2>Event Filtering</h2>
-  Con argumentos 
-  <input type="text" (keyup)="onKeyUp($event)">
-  <br>
-  Sin argumentos 
-  <input type="text" (keyup.f)="onKeyUpSinEvent()">
-</div>
-<hr>
-<div>
-  <h2>Template Variable</h2>
-  Enviando el evento
-  <input type="text" 
-    (keyup.enter)="requestInput($event)">
-  <br>
-  Enviando solo el valor
-  <input type="text" 
-    (keyup.enter)="requestValue(nombre.value)" 
-    #nombre>
-</div>
-<hr>
-<div>
-  <h2>Two Way binding</h2>
-  Mostrando como contenido de etqueta
-  <p>{{ persona.nombre }}</p>
-  Mostrando como valor de atributo <br>
-  <input type="text" value="{{ persona.nombre }}">
-  <br>
-  Mostrando como propiedad value de angular <br>
-  <input type="text" [value]="persona.nombre">
-  <br>
-  Actualización de variables
-  <input type="text" 
-    [(ngModel)]="persona.nombre">
-</div>
-<hr>
-<div>
-  <h2>*ngIf</h2>
-  <button (click)="nivel = nivel + 1">
-    Subir de nivel
-  </button>
-  <p>{{ nivel }}</p>
-  <strong *ngIf="nivel >= 10">
-    Nivel desbloqueado
-  </strong>
-
-  <h3>Container</h3>
-  <ng-container *ngIf="isLogged">
-      <button (click)="isLogged = !isLogged">
-        Iniciar sesion
+<div class="card-columns">
+  <div class="card">
+    <div class="card-header">
+      Propierty Binding
+    </div>
+    <div class="card-body">
+      <img src="{{ imageURL }}" class="card-img-top" /><br />
+      <img [src]="imageURL" class="card-img-top" /> <br />
+      <button class="btn btn-primary" disabled>Enviar</button><br />
+      <button class="btn btn-primary" [disabled]="botonStatus">Añadir</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Class Binding
+    </div>
+    <div class="card-body">
+      <button class="btn btn-primary" [class.active]="isActive">Agregar</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Style Binding
+    </div>
+    <div class="card-body">
+      <button
+        class="btn btn-primary"
+        [style.backgroundColor]="isActive ? 'green' : 'white'"
+      >
+        Boton
       </button>
-      <button>Registrarse</button>
-  </ng-container>
-  <ng-container *ngIf="!isLogged">
-      <button (click)="isLogged = !isLogged">
-        Cerrar sesion
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Event Binding
+    </div>
+    <div class="card-body">
+      <button class="btn btn-primary" (click)="guardar($event)">
+        Guardar
       </button>
-  </ng-container>
 
-  <h3>Templates</h3>
-  <ng-container *ngIf="isClosed; else menu">
-    <button (click)="isClosed = false">
-      Abrir menú
-    </button>
-  </ng-container>
-  <ng-template #menu>
-    <button>Ir al panel</button>
-    <button>Ir al perfil</button>
-    <button>Ir al lista</button>
-    <button (click)="isClosed = true">
-      Cerrar menú
-    </button>
-  </ng-template>
-</div>
-<hr>
-<div> 
-  <h3>Selección</h3>
-  <h2>Seleccionaste: {{ seleccionFruta }} con NgModel</h2>
-  <select [(ngModel)]="seleccionFruta" name="fruta">
-    <option *ngFor="let fruta of frutas" [value]="fruta.nombre">{{fruta.nombre}}</option>
-  </select>
-  <h2>Seleccionaste: {{ seleccionVerdura }} sin NgModel pero capturaste el nombre con la propiedad</h2>
-  <select  name="verdura" (change)="seleccionVerdura = escogerVerdura.options[$event.target.options.selectedIndex].text" #escogerVerdura>
-    <option *ngFor="let verdura of verduras" [value]="verdura.id">{{verdura.nombre}}</option>
-  </select>
-  <h2>Seleccionaste: {{ seleccionColor }} sin NgModel llamando a una funcion</h2>
-  <select  name="verdura2" (change)="change(escogerColor)" #escogerColor>
-    <option *ngFor="let color of colores" [value]="color.id">{{color.nombre}}</option>
-  </select>
-</div>
-<hr>
-<div>
-  <h1>@input</h1>
-  <app-blanca *ngFor="let usuario of usuarios"></app-blanca>
+      <button class="btn btn-primary" (click)="contador = contador + 1">
+        Sumar
+      </button>
+
+      <p>{{ contador }}</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      *ngFor
+    </div>
+    <div class="card-body">
+      <ul>
+        <li *ngFor="let numero of numeros">{{ numero }}</li>
+      </ul>
+      <button class="btn btn-primary" (click)="colocar()">Colocar</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Event Filtering
+    </div>
+    <div class="card-body">
+      Con argumentos
+      <input class="form-control" type="text" (keyup)="onKeyUp($event)" />
+      <br />
+      Sin argumentos
+      <input class="form-control" type="text" (keyup.f)="onKeyUpSinEvent()" />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Template Variable
+    </div>
+    <div class="card-body">
+      Enviando el evento
+      <input
+        class="form-control"
+        type="text"
+        (keyup.enter)="requestInput($event)"
+      />
+      <br />
+      Enviando solo el valor
+      <input
+        class="form-control"
+        type="text"
+        (keyup.enter)="requestValue(nombre.value)"
+        #nombre
+      />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Two Way binding
+    </div>
+    <div class="card-body">
+      Mostrando como contenido de etqueta
+      <p>{{ persona.nombre }}</p>
+      Mostrando como valor de atributo <br />
+      <input class="form-control" type="text" value="{{ persona.nombre }}" />
+      <br />
+      Mostrando como propiedad value de angular <br />
+      <input class="form-control" type="text" [value]="persona.nombre" />
+      <br />
+      Actualización de variables
+      <input class="form-control" type="text" [(ngModel)]="persona.nombre" />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      *ngIf
+    </div>
+    <div class="card-body">
+      <button class="btn btn-primary" (click)="nivel = nivel + 1">
+        Subir de nivel
+      </button>
+      <p>{{ nivel }}</p>
+      <strong *ngIf="nivel >= 10">
+        Nivel desbloqueado
+      </strong>
+
+      <h3>Container</h3>
+      <ng-container *ngIf="isLogged">
+        <button class="btn btn-primary" (click)="isLogged = !isLogged">
+          Iniciar sesion
+        </button>
+        <button class="btn btn-primary">Registrarse</button>
+      </ng-container>
+      <ng-container *ngIf="!isLogged">
+        <button class="btn btn-primary" (click)="isLogged = !isLogged">
+          Cerrar sesion
+        </button>
+      </ng-container>
+
+      <h3>Templates</h3>
+      <ng-container *ngIf="isClosed; else menu">
+        <button class="btn btn-primary" (click)="isClosed = false">
+          Abrir menú
+        </button>
+      </ng-container>
+      <ng-template #menu>
+        <button class="btn btn-primary">Ir al panel</button>
+        <button class="btn btn-primary">Ir al perfil</button>
+        <button class="btn btn-primary">Ir al lista</button>
+        <button class="btn btn-primary" (click)="isClosed = true">
+          Cerrar menú
+        </button>
+      </ng-template>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Selección
+    </div>
+    <div class="card-body">
+      Seleccionaste: {{ seleccionFruta }} con NgModel
+      <select class="form-control" [(ngModel)]="seleccionFruta" name="fruta">
+        <option *ngFor="let fruta of frutas" [value]="fruta.nombre">{{
+          fruta.nombre
+        }}</option>
+      </select>
+
+      Seleccionaste: {{ seleccionVerdura }} sin NgModel pero capturaste el
+      nombre con la propiedad
+
+      <select
+        class="form-control"
+        name="verdura"
+        (change)="
+          seleccionVerdura =
+            escogerVerdura.options[$event.target.options.selectedIndex].text
+        "
+        #escogerVerdura
+      >
+        <option *ngFor="let verdura of verduras" [value]="verdura.id">{{
+          verdura.nombre
+        }}</option>
+      </select>
+
+      Seleccionaste: {{ seleccionColor }} sin NgModel llamando a una funcion
+
+      <select
+        class="form-control"
+        name="verdura2"
+        (change)="change(escogerColor)"
+        #escogerColor
+      >
+        <option *ngFor="let color of colores" [value]="color.id">{{
+          color.nombre
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      @input y @Ouput
+    </div>
+    <div class="card-body">
+      <app-blanca
+        [data]="usuario"
+        (eventoBorrar)="borrarUsuario($event)"
+        *ngFor="let usuario of usuarios"
+      >
+      </app-blanca>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      ReactForms
+    </div>
+    <div class="card-body">
+      <form
+        action=""
+        method="post"
+        [formGroup]="signupForm"
+        (ngSubmit)="registrar(signupForm.value)"
+      >
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            class="form-control"
+            type="text"
+            name=""
+            formControlName="nombre"
+          />
+        </div>
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input
+            id="usuario"
+            class="form-control"
+            type="text"
+            name=""
+            formControlName="usuario"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            class="form-control"
+            type="email"
+            name=""
+            formControlName="email"
+          />
+          <p class="text-danger"
+            *ngIf="signupForm.get('email').hasError('required') && signupForm.get('email').touched"
+          >
+            Es requerido
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input
+            id="password"
+            class="form-control"
+            type="password"
+            name=""
+            formControlName="clave"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="signupForm.invalid"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
