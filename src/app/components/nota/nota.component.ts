@@ -160,4 +160,8 @@ export class NotaComponent implements OnInit {
     console.log(values);
     
   }
+
+  verificar(){
+    return this.signupForm.get('email').hasError('required') && this.signupForm.get('email').touched
+  }
 }

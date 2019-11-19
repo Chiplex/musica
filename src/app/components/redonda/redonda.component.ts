@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-redonda',
@@ -94,9 +95,7 @@ export class RedondaComponent implements OnInit {
   // Input Output
 
   usuarios:any = [];
-  constructor(
-    private _http:HttpClient
-  ) { }
+  
 
   ngOnInit() {
     this._http.get('https://jsonplaceholder.typicode.com/users')
@@ -130,5 +129,31 @@ export class RedondaComponent implements OnInit {
     console.log(target);
     
     this.fruta = target.options[target.options.selectedIndex].text;
+  }
+
+  // Reactive Forms
+  signupForm: FormGroup
+
+  constructor(
+    private _http:HttpClient,
+    private _builder:FormBuilder
+  ) {
+    this.signupForm = this._builder.group({
+      nombre:[''],
+      usuario:['', Validators.required],
+      email:['', Validators.compose(
+        [Validators.email, Validators.required]
+      )],
+      password:['', Validators.required]
+    });
+  }
+
+  registrar(values){
+    console.log(values);
+  }
+
+  verificar(campo, regla){
+    return this.signupForm.get(campo).hasError(regla) 
+        && this.signupForm.get(campo).touched
   }
 }

@@ -247,7 +247,7 @@
             formControlName="email"
           />
           <p class="text-danger"
-            *ngIf="signupForm.get('email').hasError('required') && signupForm.get('email').touched"
+            *ngIf="verificar()"
           >
             Es requerido
           </p>

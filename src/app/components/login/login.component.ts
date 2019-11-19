@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit {
     this._api.login(this.loginRequest).subscribe(res => {      
       if (res.access_token) {
         this._user.user = res.user;
-      }
+      } 
     })
   }
-  
 }

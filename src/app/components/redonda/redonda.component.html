@@ -1,145 +1,154 @@
-<!-- Interpolacion de cadena -->
 <div class="card-columns">
   <div class="card">
     <div class="card-header">
-      Header
+      Variables
     </div>
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <p class="card-text">Content</p>
+      {{ mensaje }}
+      {{ "Notificación: " + getMensaje() }}
     </div>
   </div>
   <div class="card">
     <div class="card-header">
-      Header
+      Property Binding
     </div>
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <p class="card-text">Content</p>
+      <img src="{{ imgUrl }}" alt="" class="card-img-top" />
+      <br />
+      <button disabled>Enviar</button>
+      <button [disabled]="status">Guardar</button>
+      <img [src]="imgUrl" alt="" class="card-img-bottom" />
     </div>
   </div>
   <div class="card">
     <div class="card-header">
-      Header
+      Class Binding
     </div>
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <p class="card-text">Content</p>
+      <button [class.grande]="tamanio">Añadir</button>
     </div>
   </div>
   <div class="card">
     <div class="card-header">
-      Header
+      Style Binding
     </div>
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <p class="card-text">Content</p>
+      <button
+        [style.border]="border ? '13px solid #ffd23e' : '10px solid #0000ff'"
+      >
+        Agregar
+      </button>
     </div>
   </div>
   <div class="card">
     <div class="card-header">
-      Header
+      Event Binding
     </div>
     <div class="card-body">
-      <h5 class="card-title">Title</h5>
-      <p class="card-text">Content</p>
+      <button (click)="editar(imgUrl)">Editar</button>
+
+      <button (click)="contador = contador + 1">Sumar</button>
+      <p>{{ contador }}</p>
+
+      <button (click)="status = !status">Sumar</button>
+
+      <button (keypress)="border = !border">Sumar</button>
     </div>
   </div>
-</div>
-<h1>{{ mensaje }}</h1>
-<h2>{{ "Notificación: " + getMensaje() }}</h2>
-<hr />
-<!-- Property Binding -->
-<img src="{{ imgUrl }}" alt="" />
-<img [src]="imgUrl" alt="" />
-<br />
-<button disabled>Enviar</button>
-<button [disabled]="status">Guardar</button>
-<hr />
-<!-- Class Binding -->
-<button [class.grande]="tamanio">Añadir</button>
-<hr />
-<!--Style Binding  -->
-<button [style.border]="border ? '13px solid #ffd23e' : '10px solid #0000ff'">
-  Agregar
-</button>
-<hr />
-<!-- Event Binding -->
-<button (click)="editar(imgUrl)">Editar</button>
+  <div class="card">
+    <div class="card-header">
+      Event Binding 2
+    </div>
+    <div class="card-body">
+      Con Argumentos <br />
+      <input type="text" name="" id="" (keyup)="keyConArgumentos($event)" />
+      <br />
+      Sin Argumentos <br />
+      <input type="text" name="" id="" (keyup.v)="keySinArgumentos()" />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Template Variable
+    </div>
+    <div class="card-body">
+      <h3>ejemplo con event</h3>
+      <input type="text" (keyup.enter)="requestInput($event)" />
+      <h3>Ejemplo con template variable</h3>
+      <input type="text" (keyup.enter)="requestValue(nombre.value)" #nombre />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Two Way Binding
+    </div>
+    <div class="card-body">
+      <p>{{ persona.nombre }}</p>
+      <strong>Interpolacion de cadena</strong>
+      <input type="text" value="{{ persona.edad }}" /><br />
+      <strong>Property Binding</strong>
+      <input type="text" [value]="persona.nombre" />
+      <h3>Actualizacion de datos</h3>
+      <strong>Nombres</strong>
+      <input type="text" [(ngModel)]="persona.nombre" />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      *ngIf
+    </div>
+    <div class="card-body">
+      <button (click)="nivel = nivel + 1">Subir nivel</button>
+      <p>{{ nivel }} <strong *ngIf="nivel >= 10">Nivel desbloqueado</strong></p>
 
-<button (click)="contador = contador + 1">Sumar</button>
-<p>{{ contador }}</p>
+      <h1>If con container</h1>
+      <ng-container *ngIf="isNotLogged">
+        <button (click)="isNotLogged = !isNotLogged">Iniciar sesion</button>
+        <button>Registrarse</button>
+      </ng-container>
 
-<button (click)="status = !status">Sumar</button>
+      <ng-container *ngIf="!isNotLogged">
+        <button (click)="isNotLogged = !isNotLogged">Cerrar sesión</button>
+      </ng-container>
 
-<button (keypress)="border = !border">Sumar</button>
-<hr />
-<!-- Event Binding 2 -->
-Con Argumentos <br />
-<input type="text" name="" id="" (keyup)="keyConArgumentos($event)" />
-<br />
-Sin Argumentos <br />
-<input type="text" name="" id="" (keyup.v)="keySinArgumentos()" />
-<hr />
-<!-- Template Variable -->
-<h2>Template Variable</h2>
-<h3>ejemplo con event</h3>
-<input type="text" (keyup.enter)="requestInput($event)" />
-<h3>Ejemplo con template variable</h3>
-<input type="text" (keyup.enter)="requestValue(nombre.value)" #nombre />
-<hr />
-<h3>Two Way Binding</h3>
-<p>{{ persona.nombre }}</p>
-<strong>Interpolacion de cadena</strong>
-<input type="text" value="{{ persona.edad }}" /><br />
-<strong>Property Binding</strong>
-<input type="text" [value]="persona.nombre" />
-<h3>Actualizacion de datos</h3>
-<strong>Nombres</strong>
-<input type="text" [(ngModel)]="persona.nombre" />
-<hr />
-
-<h1>*ngIf</h1>
-<button (click)="nivel = nivel + 1">Subir nivel</button>
-<p>{{ nivel }} <strong *ngIf="nivel >= 10">Nivel desbloqueado</strong></p>
-
-<h1>If con container</h1>
-<ng-container *ngIf="isNotLogged">
-  <button (click)="isNotLogged = !isNotLogged">Iniciar sesion</button>
-  <button>Registrarse</button>
-</ng-container>
-
-<ng-container *ngIf="!isNotLogged">
-  <button (click)="isNotLogged = !isNotLogged">Cerrar sesión</button>
-</ng-container>
-
-<h1>if con template</h1>
-<ng-container *ngIf="isClosed; else menu">
-  <button (click)="isClosed = false">Abrir Menu</button>
-</ng-container>
-<ng-template #menu>
-  <button>Ir a Panel</button>
-  <button>Ir a Perfil</button>
-  <button (click)="isClosed = true">Cerrar menu</button>
-</ng-template>
-
-<h1>*ngFor</h1>
-<button (click)="colocar()">Colocar</button>
-<ul>
-  <li *ngFor="let numero of numeros">{{ numero }}</li>
-</ul>
-<hr />
-<h1>Ejemplos</h1>
-<ul>
-  <li *ngFor="let user of users">{{ user }}</li>
-</ul>
-<h2>agregar</h2>
-<input type="text" [(ngModel)]="username" (keyup.enter)="agregar()" />
-<h2>agregar2</h2>
-<input type="text" (keyup.enter)="agregar2(persona.value)" #persona />
-<button (click)="agregar()">Agregar</button>
-
-<div class="card-columns">
+      <h1>if con template</h1>
+      <ng-container *ngIf="isClosed; else menu">
+        <button (click)="isClosed = false">Abrir Menu</button>
+      </ng-container>
+      <ng-template #menu>
+        <button>Ir a Panel</button>
+        <button>Ir a Perfil</button>
+        <button (click)="isClosed = true">Cerrar menu</button>
+      </ng-template>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      *ngFor
+    </div>
+    <div class="card-body">
+      <button (click)="colocar()">Colocar</button>
+      <ul>
+        <li *ngFor="let numero of numeros">{{ numero }}</li>
+      </ul>
+      >
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Agregar nombres
+    </div>
+    <div class="card-body">
+      <ul>
+        <li *ngFor="let user of users">{{ user }}</li>
+      </ul>
+      <h2>agregar</h2>
+      <input type="text" [(ngModel)]="username" (keyup.enter)="agregar()" />
+      <h2>agregar2</h2>
+      <input type="text" (keyup.enter)="agregar2(persona.value)" #persona />
+      <button (click)="agregar()">Agregar</button>
+    </div>
+  </div>
   <div class="card">
     <div class="card-header">
       Header
@@ -165,12 +174,73 @@ Sin Argumentos <br />
       </div> -->
       <div class="form-group">
         <label for="fruta">Seleccionaste: {{ fruta }}</label>
-        <select id="fruta" class="custom-select" name="" (change)="cambiarTitulo(seleccion)" #seleccion>
+        <select
+          id="fruta"
+          class="custom-select"
+          name=""
+          (change)="cambiarTitulo(seleccion)"
+          #seleccion
+        >
           <option [value]="fruta.id" *ngFor="let fruta of frutas">{{
             fruta.nombre
           }}</option>
         </select>
       </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Formulario Reactive form
+    </div>
+    <div class="card-body">
+      <form action="" method="post" [formGroup]="signupForm" (ngSubmit)="registrar(signupForm.value)">
+        <div class="form-group">
+          <label for="my-input">Nombre</label>
+          <input
+            id="my-input"
+            class="form-control"
+            type="text"
+            name="nombre"
+            formControlName="nombre"
+          />
+          <p class="text-danger" *ngIf="verificar('nombre','required')">No es un dato valido</p>
+        </div>
+        <div class="form-group">
+          <label for="my-input">Usuario</label>
+          <input
+            id="my-input"
+            class="form-control"
+            type="text"
+            name="usuario"
+            formControlName="usuario"
+          />
+          <p class="text-danger" *ngIf="verificar('usuario','required')">No es un dato valido</p>
+        </div>
+        <div class="form-group">
+          <label for="my-input">Email</label>
+          <input
+            id="my-input"
+            class="form-control"
+            type="text"
+            name="email"
+            formControlName="email"
+          />
+          <p class="text-danger" *ngIf="verificar('email','required')">Dato requerido</p>
+          <p class="text-danger" *ngIf="verificar('email','email')">No es un Email Valido</p>
+        </div>
+        <div class="form-group">
+          <label for="my-input">Contraseña</label>
+          <input
+          id="my-input"
+          class="form-control"
+          [type]="type"
+          name="clave"
+          formControlName="password"
+          />
+          <p class="text-danger" *ngIf="verificar('password','required')">No es un dato valido</p>
+        </div>
+        <button type="submit" [disabled]="signupForm.invalid" #guardar (click)="procesar(guardar)">Enviar</button>
+      </form>
     </div>
   </div>
 </div>
