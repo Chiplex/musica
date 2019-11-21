@@ -12,6 +12,10 @@ import { RedondaComponent } from './components/redonda/redonda.component';
 import { BlancaComponent } from './components/blanca/blanca.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UppercasePipe } from './pipes/uppercase.pipe';
+import { SortPipe } from './pipes/sort.pipe';
+import { LowercasePipe } from './pipes/lowercase.pipe';
+import { PrefixPipe } from './pipe/prefix.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BlancaComponent,
     LoginComponent,
     NavbarComponent,
+    UppercasePipe,
+    SortPipe,
+    LowercasePipe,
+    PrefixPipe,
   ],
   imports: [
     BrowserModule,

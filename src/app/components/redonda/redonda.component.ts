@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PrefixPipe } from 'src/app/pipe/prefix.pipe';
 
 @Component({
   selector: 'app-redonda',
   templateUrl: './redonda.component.html',
-  styleUrls: ['./redonda.component.css']
+  styleUrls: ['./redonda.component.css'],
+  providers: [PrefixPipe]
 })
 export class RedondaComponent implements OnInit {
 
@@ -102,6 +104,8 @@ export class RedondaComponent implements OnInit {
       .subscribe((data)=> {
         this.usuarios = data;
       });
+    console.log(this._prefix.transform(this.regalos[2].nombre, 'Dia de la amistad: '));
+    
   }
 
   borrar(id:any){
@@ -136,7 +140,8 @@ export class RedondaComponent implements OnInit {
 
   constructor(
     private _http:HttpClient,
-    private _builder:FormBuilder
+    private _builder:FormBuilder,
+    private _prefix: PrefixPipe
   ) {
     this.signupForm = this._builder.group({
       nombre:[''],
@@ -155,5 +160,67 @@ export class RedondaComponent implements OnInit {
   verificar(campo, regla){
     return this.signupForm.get(campo).hasError(regla) 
         && this.signupForm.get(campo).touched
+  }
+
+  // Pipe
+  regalos = [
+    { id:1, nombre: 'Pelota', precio: 30 },
+    { id:2, nombre: 'Coche', precio: 20 },
+    { id:3, nombre: 'Muñecas', precio: 10 },
+    { id:4, nombre: 'Guitarras', precio: 50 }
+  ];
+
+  orderBy = 'asc';
+  campo = '';
+
+  toggleOrdenar(campo){
+    this.orderBy = this.orderBy == 'asc'? 'desc': 'asc'; 
+    this.campo = campo;
+  }
+
+  // Solicitudes HTTP
+  solicitarGet(){
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer {token}');
+    this._http
+      .get(
+        'https://jsonplaceholder.typicode.com/users',
+        {
+          headers
+        }
+      )
+      .subscribe(
+        ( res => console.log(res)),
+        ( (err:HttpErrorResponse) => {
+          console.log('hubo un error');
+          console.log(err.message);
+        }),
+        ( () => console.log('Finalizado'))
+      );
+  }
+
+  archivo:any = null;
+
+  enviarPost(){
+    let formdata = new FormData();
+    formdata.append('archivo', this.archivo);
+    this._http
+      .post(
+        'https://jsonplaceholder.typicode.com/users',
+        formdata,
+        {
+          headers:{
+            'Content-type': 'multipart/form-data'
+          }
+        }
+      )
+      .subscribe(
+      ( res => console.log(res)),
+      ( (err:HttpErrorResponse) => {
+        console.log('hubo un error');
+        console.log(err.message);
+      }),
+      ( () => console.log('Finalizado'))
+    );
   }
 }

@@ -272,4 +272,37 @@
       </form>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header">
+      Pipe Simple: uppercase
+    </div>
+    <div class="card-body">
+      {{ regalos[0].nombre | uppercase:toggleUppercase }}
+      <button (click)="toggleUppercase = !toggleUppercase"></button>
+    </div>
+    <div class="card-header border-top">      
+      Pipe normal: Ordenacion
+    </div>
+    <div class="card-body">
+      <ul>
+        <li *ngFor="let regalo of regalos | sort:'asc':'precio'">
+          {{ regalo.nombre }} : {{ regalo.precio }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Solicitudes HTTP
+    </div>
+    <div class="card-body">
+      <button (click)="solicitarGet()">
+        Get
+      </button>
+      <input type="file" name="archivo" [(ngModel)]="archivo">
+      <button type="submit" (click)="enviarPost()">
+        Post
+      </button>
+    </div>
+  </div>
 </div>

@@ -1,60 +1,61 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { LowercasePipe } from "../../pipes/lowercase.pipe";
 
 @Component({
   selector: "app-nota",
   templateUrl: "./nota.component.html",
-  styleUrls: ["./nota.component.css"]
+  styleUrls: ["./nota.component.css"],
+  providers: [LowercasePipe]
 })
 export class NotaComponent implements OnInit {
-  
   // Property Binding
   imageURL = "http://lorempixel.com/400/200";
   botonStatus = false;
-  
+
   // Class y Style Binding
   isActive = true;
 
   // Event Binding
-  guardar(event){
+  guardar(event: any) {
     console.log(event);
   }
 
   contador = 1;
 
   // *ngFor
-  numeros = [1,2,3,4,5,6];
+  numeros = [1, 2, 3, 4, 5, 6];
 
-  colocar(){
+  colocar() {
     this.numeros.push(Math.random());
   }
 
   // Event Filtering
-  onKeyUp(event){
+  onKeyUp(event: { keyCode: number; }) {
     if (event.keyCode === 13) {
       console.log("con argumentos");
     }
   }
-  
-  onKeyUpSinEvent(){
-    console.log("sin argumentos");    
+
+  onKeyUpSinEvent() {
+    console.log("sin argumentos");
   }
 
   //Template Variable
-  requestInput(event){
+  requestInput(event: { target: { value: any; }; }) {
     console.log(event.target.value);
   }
 
-  requestValue(nombre){
+  requestValue(nombre: any) {
     console.log(nombre);
   }
 
   // Two way binding
   persona = {
-    nombre: 'alex',
-    edad:35
-  }; 
+    nombre: "alex",
+    edad: 35
+  };
 
   //If en  Contenedores y Templates
   nivel = 0;
@@ -65,55 +66,55 @@ export class NotaComponent implements OnInit {
   isClosed = true;
 
   // Select
-  frutas:any = [
+  frutas: any = [
     {
       id: 1,
-      nombre: 'manzana'
+      nombre: "manzana"
     },
     {
       id: 2,
-      nombre: 'naranja'
+      nombre: "naranja"
     },
     {
       id: 3,
-      nombre: 'platano'
+      nombre: "platano"
     }
   ];
   seleccionFruta = null;
 
-  verduras:any = [
+  verduras: any = [
     {
       id: 1,
-      nombre: 'tomate'
+      nombre: "tomate"
     },
     {
       id: 2,
-      nombre: 'zanahoria'
+      nombre: "zanahoria"
     },
     {
       id: 3,
-      nombre: 'locoto'
+      nombre: "locoto"
     }
   ];
   seleccionVerdura = null;
 
-  colores:any = [
+  colores: any = [
     {
       id: 1,
-      nombre: 'rojo'
+      nombre: "rojo"
     },
     {
       id: 2,
-      nombre: 'naranja'
+      nombre: "naranja"
     },
     {
       id: 3,
-      nombre: 'amarillo'
+      nombre: "amarillo"
     }
   ];
   seleccionColor = null;
 
-  change(target){
+  change(target) {
     console.log(target);
     this.seleccionColor = target.options[target.options.selectedIndex].text;
   }
@@ -125,43 +126,106 @@ export class NotaComponent implements OnInit {
     _http de tipo HttpClient pero debe estar en 
     otro sitio añadiendo otras variables */
 
-  ngOnInit(){
-    this._http
-      .get('https://jsonplaceholder.typicode.com/users')
-      .subscribe((datos:any[]) => {
-        this.usuarios = datos
-      })
-  }
+  /**
+   * Aqui habia un OnInit paro a ayudar a otro tema
+   *
+   */
 
-  borrarUsuario(id:number){
-    this.usuarios = this.usuarios.filter(
-      usuario => usuario.id != id
-      );
+  borrarUsuario(id: number) {
+    this.usuarios = this.usuarios.filter(usuario => usuario.id != id);
   }
 
   // Reactivee Formes
   signupForm: FormGroup;
 
-  constructor(    
+  /**
+   *
+   * aqui habia un constructor
+   */
+
+  registrar(values: any) {
+    console.log(values);
+  }
+
+  verificar() {
+    return (
+      this.signupForm.get("email").hasError("required") &&
+      this.signupForm.get("email").touched
+    );
+  }
+
+  // Pipes
+  regalos: any = [
+    { id: 1, nombre: "peluche", precio: 15.5 },
+    { id: 2, nombre: "guitarra", precio: 90.5 },
+    { id: 3, nombre: "COCHE", precio: 30.5 },
+    { id: 4, nombre: "princesa", precio: 50.5 }
+  ];
+
+  toggleUppercase = false;
+
+  constructor(
     private _http: HttpClient,
-    private _builder: FormBuilder
+    private _builder: FormBuilder,
+    private _lowerCasePipe: LowercasePipe
   ) {
     this.signupForm = this._builder.group({
-      nombre: [''],
-      usuario: ['', Validators.required],
-      email: ['', Validators.compose(
-          [Validators.email, Validators.required]
-        )],
-      clave: ['', Validators.required]
+      nombre: [""],
+      usuario: ["", Validators.required],
+      email: ["", Validators.compose([Validators.email, Validators.required])],
+      clave: ["", Validators.required]
     });
   }
 
-  registrar(values){
-    console.log(values);
-    
+  ngOnInit() {
+    this._http
+      .get("https://jsonplaceholder.typicode.com/users")
+      .subscribe((datos: any[]) => {
+        this.usuarios = datos;
+      });
+    console.log(
+      this._lowerCasePipe.transform(
+        this.regalos[2].nombre
+        )
+      );
   }
 
-  verificar(){
-    return this.signupForm.get('email').hasError('required') && this.signupForm.get('email').touched
+  // Solicitudes http
+  solicitarGet(){
+    const headers = new HttpHeaders()
+      .set(
+        'Authorization', 
+        'Bearer "Token"'
+      );
+    this._http
+      .get(
+        'https://jsonplaceholder.typicode.com/users', 
+        { 
+          headers
+        } 
+      ).subscribe(
+        ( res => console.log(res) ),
+        ( (err:HttpErrorResponse) => {
+          console.log("Ha ocurrido un error");
+          console.log(err.message);
+        }),
+        ( () => console.log("Finalizó solicitud") )
+      );
+  }
+
+  archivo:any = "";
+
+  enviarPost(){
+    let formData = new FormData();
+    formData.append('archivo', this.archivo);
+    this._http.post(
+      'https://jsonplaceholder.typicode.com/users',
+      formData,
+      {
+        headers:{ 'Content-Type': 'multipart/form-data' }
+      }
+      ).subscribe(
+         data => console.log(data)
+      );
   }
 }
