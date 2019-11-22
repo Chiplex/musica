@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { LowercasePipe } from "@pipes/lowercase.pipe";
+import { NotaService } from '@services/nota.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-nota",
@@ -164,19 +166,6 @@ export class NotaComponent implements OnInit {
 
   toggleUppercase = false;
 
-  constructor(
-    private _http: HttpClient,
-    private _builder: FormBuilder,
-    private _lowerCasePipe: LowercasePipe
-  ) {
-    this.signupForm = this._builder.group({
-      nombre: [""],
-      usuario: ["", Validators.required],
-      email: ["", Validators.compose([Validators.email, Validators.required])],
-      clave: ["", Validators.required]
-    });
-  }
-
   ngOnInit() {
     this._http
       .get("https://jsonplaceholder.typicode.com/users")
@@ -227,5 +216,29 @@ export class NotaComponent implements OnInit {
       ).subscribe(
          data => console.log(data)
       );
+  };
+
+  // Parametros de ruta
+  notasService = new NotaService;
+  notas = this.notasService.getNotas();
+
+  constructor(
+    private _http: HttpClient,
+    private _builder: FormBuilder,
+    private _lowerCasePipe: LowercasePipe,
+    public _router: Router
+  ) {
+    this.signupForm = this._builder.group({
+      nombre: [""],
+      usuario: ["", Validators.required],
+      email: ["", Validators.compose([Validators.email, Validators.required])],
+      clave: ["", Validators.required]
+    });
+  }
+
+  goNota(nota){
+    const id = nota.id;    
+    this._router.navigate(['/nota/'+id]);    
   }
 }
+

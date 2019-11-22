@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PrefixPipe } from 'src/app/pipes/prefix.pipe';
+import { ClavesService } from '@services/claves.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-redonda',
@@ -141,7 +143,8 @@ export class RedondaComponent implements OnInit {
   constructor(
     private _http:HttpClient,
     private _builder:FormBuilder,
-    private _prefix: PrefixPipe
+    private _prefix: PrefixPipe,
+    private _router: Router
   ) {
     this.signupForm = this._builder.group({
       nombre:[''],
@@ -223,4 +226,14 @@ export class RedondaComponent implements OnInit {
       ( () => console.log('Finalizado'))
     );
   }
+
+  // Parametros
+  clavesService = new ClavesService;
+  claves = this.clavesService.getClaves();
+
+  goClave(clave:any){
+    const id = clave.id;
+    this._router.navigate(['/clave/'+id]);
+  }
+
 }

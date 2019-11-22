@@ -305,4 +305,45 @@
       </button>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header">
+      Notas
+    </div>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td>Nombre</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nota of notas">
+          <td>{{nota.id}}</td>
+          <td>{{nota.nombre}}</td>
+          <td><button (click)="goNota(nota)">Info</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Directicas
+    </div>
+    <div class="card-body">
+      <span [appAcorde]="false">
+        Este texto será un acorde
+      </span><br>
+      <span appInstrumento>
+        Este texto será un instrumento
+      </span>
+      <br>
+      <span appParlante 
+        [textura]="'blue'" 
+        [underline]="true">
+        Este texto será un parlante
+      </span>
+    </div>
+  </div>
 </div>
+

@@ -18,6 +18,12 @@ import { LowercasePipe } from '@pipes/lowercase.pipe';
 import { PrefixPipe } from '@pipes/prefix.pipe';
 
 import { RouterModule, Routes } from '@angular/router';
+import { ShowNotaComponent } from './components/nota/show-nota/show-nota.component';
+import { AcordeDirective } from './directives/acorde.directive';
+import { InstrumentoDirective } from './directives/instrumento.directive';
+import { ParlanteDirective } from './directives/parlante.directive';
+import { ShowClaveComponent } from './components/clave/show-clave/show-clave.component';
+import { BemolDirective } from './directives/bemol.directive';
 
 const router: Routes = [
   {
@@ -42,6 +48,14 @@ const router: Routes = [
   {
     path: 'nota',
     component: NotaComponent
+  },
+  {
+    path: 'nota/:id',
+    component: ShowNotaComponent
+  },
+  {
+    path: 'clave/:id',
+    component: ShowClaveComponent 
   }
 ];
 
@@ -59,6 +73,12 @@ const router: Routes = [
     SortPipe,
     LowercasePipe,
     PrefixPipe,
+    ShowNotaComponent,
+    AcordeDirective,
+    InstrumentoDirective,
+    ParlanteDirective,
+    ShowClaveComponent,
+    BemolDirective,
   ],
   imports: [
     BrowserModule,

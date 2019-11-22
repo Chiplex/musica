@@ -345,4 +345,37 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header">
+      Claves
+    </div>
+    <table class="table table-light">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clave of claves">
+          <td>{{ clave.id }}</td>
+          <td>{{ clave.nombre }}</td>
+          <td>
+            <button (click)="goClave(clave)">info</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Directivas
+    </div>
+    <div class="card-body">
+      <span appBemol [color]="'green'" [underline]="900">
+        Esto deberia ser bemol
+      </span>
+    </div>
+  </div>
 </div>
