@@ -2,6 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@pipes/*": ["src/app/pipes/*"],
+      "@services/*": ["src/app/service/*"],
+      "@components/*": ["src/app/components/*"],
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

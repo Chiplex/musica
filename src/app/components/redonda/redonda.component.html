@@ -325,4 +325,24 @@
       <button (click)="enviarPost()">post</button>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header">
+      Rutas
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>
+          <a [routerLink]="['musica']">
+            Música
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['silencio']">
+            Silencio
+          </a>
+        </li>
+      </ul>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

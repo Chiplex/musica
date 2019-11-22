@@ -2,6 +2,11 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
+    "paths": {
+      "@pipes/*": ["src/app/pipes/*"],
+      "@services/*": ["src/app/service/*"],
+      "@components/*": ["src/app/components/*"],
+    },
     "types": []
   },
   "exclude": [

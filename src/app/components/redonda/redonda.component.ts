@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PrefixPipe } from 'src/app/pipe/prefix.pipe';
+import { PrefixPipe } from 'src/app/pipes/prefix.pipe';
 
 @Component({
   selector: 'app-redonda',

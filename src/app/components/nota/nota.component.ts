@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { LowercasePipe } from "../../pipes/lowercase.pipe";
+import { LowercasePipe } from "@pipes/lowercase.pipe";
 
 @Component({
   selector: "app-nota",
